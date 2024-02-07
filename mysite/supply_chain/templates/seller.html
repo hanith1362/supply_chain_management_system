@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: url("data:image/svg+xml,%3Csvg width='12' height='6' viewBox='0 0 12 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 0l6 6H0z' fill='%23333'/%3E%3C/svg%3E") no-repeat right #fff;
+            background-position-x: calc(100% - 12px);
+            background-position-y: center;
+        }
+
+        input[type="submit"] {
+            background-color: #0b149b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #70cedf;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Seller Information</h2>
+        <form action="{% url 'seller' %}" method='post' >
+            {% csrf_token %}
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required>
+
+            <label for="shopname">ShopName:</label>
+            <input type="text" id="shopname" name="shopname" required>
+
+            <label for="gst_number">GST Number:</label>
+            <input type="text" id="gst_number" name="gst_number" required>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" onchange="populateSubcategory()">
+                <option value="" selected disabled>Select category</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="books">Books</option>
+                <option value="vegetables">Vegetables</option> 
+                <option value="fruits">Fruits</option> 
+                <!-- Add more categories as needed -->
+            </select>
+
+            <label for="subcategory">Subcategory:</label>
+            <select id="subcategory" name="subcategory" disabled>
+                <option value="" selected disabled>Select category first</option>
+            </select>
+
+            <label for="product_number">Number of Products Available:</label>
+            <input type="number" id="product_number" name="product_number" min="1" required>
+
+            <label for="product_price">Price of Each Product:</label>
+            <input type="number" id="product_price" name="product_price" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function populateSubcategory() {
+            var category = document.getElementById("category").value;
+            var subcategoryDropdown = document.getElementById("subcategory");
+            subcategoryDropdown.disabled = false;
+            subcategoryDropdown.innerHTML = "";
+            var subcategories = [];
+
+            if (category === "electronics") {
+                subcategories = ["Laptops", "Smartphones", "Tablets", "Accessories"];
+            } else if (category === "clothing") {
+                subcategories = ["Men's Clothing", "Women's Clothing", "Kids' Clothing", "Accessories"];
+            } else if (category === "books") {
+                subcategories = ["Fiction", "Non-Fiction", "Sci-Fi", "Romance"];
+            }else if (category === "vegetables") { // Added vegetables subcategories
+                subcategories = ["Potato - ఆలుగడ్(kg)",
+"Tomato - టమాట(kg)",
+"Onion - ఉల్లిపాయ(kg)",
+"Brinjal (Eggplant) - వంకాయ(kg)",
+"Lady's Finger (Okra) - బెండకాయ(kg)",
+"Carrot - క్యారెట్(kg) ",
+"Green Peas - గ్రీన్ పీస్(kg) ",
+"Cabbage - కోసు(kg) ",
+"Cauliflower - కోబ్బరి కూర(kg) ",
+"Spinach - పాలకూర(kg)",
+"Bottle Gourd (Lauki) - సొరకాయ(kg)",
+"Bitter Gourd - కాకర(kg)",
+"Ridge Gourd (Turai) - బీరకాయ(kg)",
+"Drumstick - ములక్కాడ(kg) ",
+"Green Chilli - పచ్చి మిర్చి(kg) "];
+            } else if (category === "fruits") { // Added fruits subcategories
+                subcategories = ["Citrus Fruits", "Berry Fruits", "Tropical Fruits", "Stone Fruits"];
+            }
+            // Add more subcategories for other categories as needed
+
+            for (var i = 0; i < subcategories.length; i++) {
+                var option = document.createElement("option");
+                option.text = subcategories[i];
+                subcategoryDropdown.add(option);
+            }
+        }
+    </script>
+</body>
+</html>

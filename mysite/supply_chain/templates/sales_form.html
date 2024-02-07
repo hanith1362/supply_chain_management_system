@@ -1,0 +1,68 @@
+<html>
+  <head>
+  <title>SignUp page</title>
+  {% load static%}
+  <link rel="stylesheet" href="{% static 'salestyle.css'%}">
+  </head>
+   
+  <body>
+  <div class='msg'>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages%}
+              <li{% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+        {% endfor %}
+      </ul>
+  {% endif %}
+  </div>
+  <h3>SALES FORM</h3>
+  
+   
+  <table align="center" cellpadding = "10">
+   
+  <!----- First Name ---------------------------------------------------------->
+<form action="{% url 'sales_form' %}" method='post' >
+    {% csrf_token %}
+     <tr>
+     <td>FIRST NAME</td>
+     <td><input type="text" name="First_Name" maxlength="30" required/>
+      (max 30 characters a-z and A-Z)
+      </td>
+      </tr>
+  <!----- Last Name ---------------------------------------------------------->
+  <tr>
+  <td>LAST NAME</td>
+  <td><input type="text" name="Last_Name" maxlength="30" required/>
+  (max 30 characters a-z and A-Z)
+  </td>
+  </tr>
+   
+   
+  <!----- Email Id ---------------------------------------------------------->
+  <tr>
+  <td>EMAIL ID</td>
+  <td><input type="text" name="Email_Id" maxlength="100" required/></td>
+  </tr>
+   
+  <!----- Password---------------------------------------------------------->
+  <tr>
+    <td>PASSWORD</td>
+    <td><input type="password" name="password" maxlength="100" required/></td>
+    </tr>
+   
+  <!----- Confirm_password ------------------------------------------------------------>
+  <tr>
+    <td>CONFIRM PASSWORD</td>
+    <td><input type="password" name="confirm_password" maxlength="100" required/></td>
+    </tr>
+  <!----- Submit and Reset -------------------------------------------------->
+  <tr>
+  <td colspan="2" align="right">
+    <input type="submit">
+</form>
+  </td>
+  </tr>
+  </table>
+   
+  </body>
+  </html>

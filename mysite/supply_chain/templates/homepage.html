@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Supply Chain Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            padding: 20px 40px;
+            font-size: 18px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .customer {
+            background-color: #4caf50;
+        }
+
+        .seller {
+            background-color: #2196f3;
+            padding: 20px 40px;
+            font-size: 18px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .logout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f44336;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Supply Chain Management System</h1>
+        <div class="buttons-container">
+            <button class="button customer">Customer</button>
+            <div class="seller" onclick="seller()">Seller</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="buttons-container">
+            <div class="logout" onclick="logout()">Logout</div>
+        </div>
+    </div>
+    
+    <script>
+        function seller() {
+            window.location.href = "{% url 'seller' %}";
+        }
+        
+        function logout() {
+            window.location.href = "{% url 'logout' %}";
+        }
+    </script>
+</body>
+</html>
